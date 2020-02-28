@@ -1,3 +1,9 @@
+# executable
+cave
+
+# old source packages
+*.tar.gz
+
 # Prerequisites
 *.d
 
