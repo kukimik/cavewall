@@ -1,0 +1,134 @@
+2004-06-30 Kuki <kukimik@poczta.onet.pl>
+
+    * mirrorable characters conversion in mirror block operations
+    * shortened too long text on status bar in block operations mode
+    
+2004-07-01 Kuki <kukimik@poczta.onet.pl>
+
+    * fixed a bug in ANSI import that set color and background to white and black when ANSI code set only new attribute
+    * more ANSI codes support in import.c (ESC[2J, ESC[K and cursor movement codes)
+    
+2004-07-08 Kuki <kukimik@poczta.onet.pl>
+
+    * finally added support for large pics (up to 1000x1000, more would screw up status bar coordinates display) - may be buggy and is not optimized
+    * fixed a bug in rotate undo
+    * modified the logo a bit
+    
+2004-07-11 Kuki <kukimik@poczta.onet.pl>
+
+    * removed a bug saving undo even if no block opearation was done
+    * removed some bugs in large pics support
+    * cosmetic changes to README
+    
+2004-07-14 Kuki <kukimik@poczta.onet.pl>
+
+    * 0.2 release
+    
+2004-07-25 Kuki <kukimik@poczta.onet.pl>
+
+    * simple parameter support
+    * shows usage note when too many parameters specified
+    * key changes - paste F10, undo F11
+    * removed a bug in import preventing import of files larger than current editpad size
+    * found out the curses wresize() function - change_editp_size() rewritten, now works a whole lot faster
+
+2004-07-26 Kuki <kukimik@poczta.onet.pl>
+
+    * parameters now work ok
+    * redo support
+    * a nice, 10kB README
+
+2004-07-28 Kuki <kukimik@poczta.onet.pl>
+
+    * removed some bugs in undo saving, including removing undo information before import, even if nothing was imported and deleting pads that did not exist 
+    * 0.21 release
+    
+2004-08-03 Kuki <kukimik@poczta.onet.pl>
+
+    * move cursor to (0,0) after importing (to avoid having parts of previous picture remaining on screen)
+
+2004-08-12 Kuki <kukimik@poczta.onet.pl>
+
+    * added transparent paste
+    * import functions, cut, block_clear and rmch now use default colors and attributes
+    * set default background to editp with wsetbkgd
+    * protected save_undo from saving undo outside the editp (occured when pasting at the edge of a maximum-sized editp)
+    * removed a yes=no bug in the "paste image larger than editp" question
+    * enter now officialy clears to eol
+    
+2004-08-21 Kuki <kukimik@poczta.onet.pl>
+
+    * block selection highlighting - not really optimized but seems to work well
+    * removed a bug - filling block with empty string no longer fills it with crap
+    * documented new features in README
+    * 0.25 release
+
+2004-08-22 Kuki <kukimik@poczta.onet.pl>
+
+    * removed a bug - box with empty-string walls no longer draws crap
+
+2004-08-24 Kuki <kukimik@poczta.onet.pl>
+
+    * some minor changes in block_drawbox
+
+2004-12-07 Kuki <kukimik@poczta.onet.pl>
+
+    * basic HTML export
+
+2005-01-14 Kuki <kukimik@poczta.onet.pl>
+
+    * reverse support in HTML export
+
+2006-01-14 Kuki <kukimik@poczta.onet.pl>
+
+    * simple menu under F1 (instead of help screen)
+    * moved help to menu and modified help screen a bit
+    * "quit program" position in menu (at last some nice way to exit CAVE WALL :) ) 
+    * "exit menu" position in menu
+    * some changes in README regarding the menu feature
+    
+2006-05-21 Kuki <kukimik@poczta.onet.pl>
+
+    * changes in menu layout
+    * color selection as menu position (to be moved to a dialog box)
+
+2006-05-28 Kuki <kukimik@poczta.onet.pl>
+
+    * killed highlighting bug
+
+2006-06-12 Kuki <kukimik@poczta.onet.pl>
+
+    * color selection in dialog box
+
+2006-07-05 Kuki <kukimik@poczta.onet.pl>
+
+    * little NODIALOG issues
+    * fixed color selection dialog bug
+    
+2006-07-06 Kuki <kukimik@poczta.onet.pl>
+
+    * unused function keys do not produce crap on screen
+    * step mode selection dialog
+    * 0.26 release    
+    
+2006-07-08 Kuki <kukimik@poczta.onet.pl>
+
+    * new menu and dialogs handling
+    * fixed HTML export bug
+    * 0.265 release
+    * CSS HTML export
+    * little README changes (CSS export, new website URL)
+    * removed old HTML export code
+
+2006-07-10 Kuki <kukimik@poczta.onet.pl>
+
+    * multiattribute support
+    * fixed dialogs bug (cursor moving to row <0)
+    * README changes
+    
+2006-07-12 Kuki <kukimik@poczta.onet.pl>
+
+    * fixed color dialog bug
+    * PgUp, PgDn support in dialogs (and Home/End in color selection dialog)
+    * changed function keys order, now F8 and F9 are not used
+    * 0.27 release

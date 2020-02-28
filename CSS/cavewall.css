@@ -1,0 +1,32 @@
+<style type="text/css">
+SPAN.c0 { color: black }
+SPAN.c1 { color: navy }
+SPAN.c2 { color: green }
+SPAN.c3 { color: teal }
+SPAN.c4 { color: maroon }
+SPAN.c5 { color: purple }
+SPAN.c6 { color: olive }
+SPAN.c7 { color: silver }
+SPAN.cb0 { color: gray; font-weight: bold }
+SPAN.cb1 { color: blue; font-weight: bold }
+SPAN.cb2 { color: lime; font-weight: bold }
+SPAN.cb3 { color: aqua; font-weight: bold }
+SPAN.cb4 { color: red; font-weight: bold }
+SPAN.cb5 { color: fuchsia; font-weight: bold }
+SPAN.cb6 { color: yellow; font-weight: bold }
+SPAN.cb7 { color: white; font-weight: bold }
+
+SPAN.b0 { background-color: black }
+SPAN.b1 { background-color: navy }
+SPAN.b2 { background-color: green }
+SPAN.b3 { background-color: teal }
+SPAN.b4 { background-color: maroon }
+SPAN.b5 { background-color: purple }
+SPAN.b6 { background-color: olive }
+SPAN.b7 { background-color: silver }
+
+SPAN.bl { text-decoration: blink }
+
+SPAN.ul { text-decoration: underline }
+
+</style>

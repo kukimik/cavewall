@@ -1,0 +1,27 @@
+*Features:
+- manual
+- figlet interface
+- command line
+- scripting
+- optimize selection highlight in block selecting mode
+#! config file (~/.caverc..)
+- react to terminal size changes
+#! better ANSI export handling (unsetting only selected attrs)
+- animations
+- irregular blocks (and irregular highlighting)
+- magic wand block selection mode
+- shape drawing - lines, rectangles, circles, etc.
+#! brushes
+- other export filters (C,...)
+#! aewan import (export??)
+- mouse support
+- layers
+- remove dim attribute(?), add optional (config file!) extended attributes
+ 
+
+*Block ops:
+#! char/color/attr conversion tables
+#! external (in files) mirror conversion tables
+#! export selection
+- block ops plugin system
+

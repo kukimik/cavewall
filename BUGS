@@ -1,0 +1,7 @@
+- Status bar options probably sometimes don't fit the status bar (are too long)
+- may not use colors set in config.h everywhere as default background/foreground colors - may use black and white instead of them (same goes to attributes)
+- sometimes image gets cropped or there are blank lines at the end of file after exporting, don't know why or when - THIS IS QUITE SERIOUS, BUT STRANGELY SEEMS NOT TO OCCUR ANY LONGER (???)
+- when menu is turned on just after the startup banner is shown, cursor is invisible after exiting menu until you move the cursor - minor bug
+- no white-on-white color/bgnd. dunno why
+
+Probably some others, please report to: kukimik@poczta.onet.pl

@@ -1,0 +1,171 @@
+                                                        ____     _        
+  __                 _      _                          / ___|   / |       
+ / _|  _        _   | \    / |  _                     | ||  \/\/  |       
+| |_  |_| |  | |_   |  \/\/  | |_| |  |               | |___      |       
+ \__| | |  \/  |_   |___/\___| | | |_ |_               \____|/\___|       
+                                             ()  ^                        
+.-''-.-''-.-''-.-''-.-''-.-''-.-''-.-''-._ /''''\| ____.-''-.-''-.-''-.  
+'-..-'-..-'-..-'-..-'-..-'-..-'-..-'-..-'-. /""\ | _..-'-..-'-..-'-..-'
+                                                                          
+  [ Colored ASCII Visual Editor Without Any Loathsome Limitations ]
+
+!!! WARNING !!!
+This is a development version. Author is not responsible for any damage caused by this software. Use at your own risk!
+
+This project is no logner maintained.
+
+This software is distributed under the terms of GNU General Public License v.2.0 (see the "LICENSE" file).
+Please also check the "BUGS" file.
+
+0. INTRODUCTION
+
+CAVE WALL (Colored ASCII Visual Editor Without Any Loathsome Limitations) is an ASCII Art editor for Linux, somewhat similiar to such programs as JavE, Aewan, DuhDraw or EDASCII.  It is distributed on the terms of GNU General Public License. At the time it is in early development stage, but usable. It's written in C and the interface is based on the ncurses library.
+
+It has not been tested on systems other than Linux, if you would like to do it, then - do it, and tell me about the results. I'd be very grateful if you did. It also has not been tested for compatibility with other (not ncurses) implementations of the curses library.
+
+The project, originally named CAVE, was started in 2002 by Michal Miszewski, then left for a while, and revived in 2004 by me. The name was changed because it had already been reserved by some other project. CAVE WALL is my first bigger project and I took it up mostly in order to learn a bit of C programming.
+
+1. INSTALLATION
+
+First make sure you have some recent version of ncurses installed. After unpacking the cavewall-x.x.tar.gz tarball check and adjust the "config.h" file to your needs, then  just run "make" in the unpacked directory and the program should compile. If nothing went wrong you can run "./cave" to start the program. You may also copy the "cave" file to /usr/local/bin or wherever you want to make it available systemwide.
+
+2. USING CAVE WALL
+
+You can start CAVE WALL either by typing "cave" or "cave [FILENAME]". In the first case program starts and shows a banner (or a blanks screen if it was so set during setup). In the second one it loads the file specified in the optional FILENAME parameter. If the file does not exist it will not be created, but the filename will be set as default filename for the export option.
+
+Once you have started CW you should see black screen with a blue line at the bottom. The line is called status bar. It shows (in order from left to right):
+- red B letter if in blockmode (see BLOCK OPERATIONS section)
+- cursor's x (column it is in)
+- cursor's y (row)
+- character the cursor is placed over
+- current foreground color
+- current background color
+- current attributes - this displays the first character of name of each attribute that is currently set. The character is displayed using the attribute it is connected with (so, when "bold" is on, a 'b' character will be displayed in bold; when "underline" is on, an underlined 'u' will be displayed, etc.).
+- current cursor step mode
+- last pressed key's keynumber
+- a demonstration of how will printed characters look with current foreground color, background color and attributes set
+
+The black part of the screen shows part of the edit pad (because usually it is larger than your terminal).
+
+Now move the cursor using the cursor keys of your keyboard. Press a letter to print thr letter on the screen. Move the cursor to the edge of the screen and further to scroll through the edit pad.  Pressing PgUp, PgDown, End and Home keys moves the cursor to the edge of the screen. If it is already there, it scrolls the edit pad by one screen. CAVE WALL supports images up to 1000x1000 characters, but remember that editing large images consumes much memory. With current systems that's usually not a big problem, but if you have 16M of RAM or so, then watch out! It's also nice to know that the pad is not 1000x1000 at the beginning, but it is resized when you scroll it. It is not shrinked though, when you scroll back, even if no characters were printed. Pressing space does not earse the character under cursor - Delete and Backspace keys do so. Space just changes it's color, background color and attributes to currently set ones. Enter clears to the end of the current line.
+
+Some important operations are performed using the function keys. The default key bindings (not changed in "config.h" during installation) are:
+
+F1 - show menu
+F2 - export image
+F3 - import image
+F4 - block operations
+F5 - show color/background selection dialog
+F6 - show attribute selection dialog
+F7 - show cursor step mode selection dialog
+F8 - NOT USED
+F9 - NoT USED
+F10 - paste from clipboard
+F11 - undo
+F12 - clear screen
+
+Here's a more detailed info on each of these operations:
+
+F1 - show menu - shows a menu, you can move using the arrow keys or number keys, choose menu positions by hitting enter. Here's a short description of menu positions:
+	Help - Actually it just displays the function keys list that is above.
+	Select fg/bg color - shows a foreground/background color selection dialog - it may be faster than setting them using F5/F6 keys
+	Select attributes - shows a attribute  selection dialog - it may be faster than setting them using F7 key
+	Select step mode - shows a step mode selection dialog - it may be faster than it using F8 key
+	Insert FIGletters - available if you set it in config.h and have FIGlet (http://www.figlet.org) installed - shows a dialog that's used for inserting FIGlet output in current cursor position (THIS DOES NOT WORK YET)
+	Exit menu - exits menu :) 
+	Quit CAVE WALL - quits program - WARNING: without any "are you really really sure"-like questions and without possibility to save your work. So - first save, then quit!
+F2 - export image - three formats are supported: Text, ANSI and HTML. Choose the format and then enter filename. Tilde ( ~ ) is NOT allowed. Export automatically deletes empty spaces at the end of lines and empty lines at the end of file. HTML export uses CSS. The created HTML file will link to stylesheet cavewall.css, which is included in the cavewall.XXXX.tar.gz package.
+F3 - import image - just enter filename (tilde IS allowed, wildcards NOT allowed), CAVE WALL will automatically interprete any ANSI codes
+F4 - block operations - that's a more advanced one. Check appropriate section below.
+F5 - Shows color selection dialog. Use arrow keys to move around. Pressing Enter will choose the currently selected fg/bg combination. New drawn characters will have this color.
+F6 - Shows character attribute selection dialog. Use arrow or number keys to move around, press Enter to select/deselect an attribute. Selected attributes have a "*" next to their name. Selecting first attribute ("normal") deselects all attributes. Choose the last position ("Exit") to exit dialog. Note that attributes (and colors too, but maybe in a less noticeable way) are displayed in different ways on different terminals. So don't panic when your blinking character does not blink.
+F7 - Shows cursor step mode selection dialog.
+     What are the step modes? They determine where will the cursor move after a character is drawn. This can be:
+	- normal - does not move at all
+	- step_fwd - one character forward (right)
+	- step_bwd - one character backward (left)
+	- step_up - one charatcer up
+	- step_dn - one character down
+	- step_ul - one up, one left
+	- step_ur - one up, one right
+	- step_dl - one down, one left
+	- step_dr - one down, one right
+	- step_rnd - one step in random direction (including diagonal directions), so it can be any of the above excluding normal. This can be switched off in "config.h" during installation.
+	(or: change cursor step mode - scrolls through the step modes list).
+F8 - NOTHING AS FOR NOW
+F9 - NOTHING AS FOR NOW
+F10 - paste from clipboard - pastes a previously copied selection (see BLOCK OPERATIONS section). The upper left-hand corner of the selection is placed at the current cursor position. You can paste with transparency - characters which are spaces with default colors and attributes are treated as transparent.
+F11 - undo - undoes last operation. And only the last one. Operations that can be undid are: character drawing and color/attribute changes, block operations excluding copy, pasting, undoing. Since undo is an undoable operation, pressing this again is redo.
+F12 - clear screen - clears the edit pad completly and resizes it to one screen size. This CAN NOT be undid.
+
+3. BLOCK OPERATIONS
+
+Block operations are operations on rectangular selections. Some of them are useful and can speed up your work. Some probably are not.
+
+Here's how to use them in general:
+
+Press F4. A red "B" will appear on the left of the status bar. You are now in block selection mode. Pressing F4 again without moving the cursor or after moving it and then coming back to the same place will disable it. But don't disable it. Now, in block mode, move cursor to some other place and press F4 again. Notice how your selection is highlighted (if you didn't turn it off in config.h). This highlighting may seem useful (as for me, I can't say it really is). Now, a rectangle with two opposite corners in the points you choose by pressing F4 is selected. This rectangle is your block. A menu will appear on the status bar. Read it. It is the list of available block operations. Press the [G] key to see more of them. A full list of block operations is below.  Try some option by pressing adequate keys ([A],[B],[C], etc.). After using one of them (if it was not the "e.DelBlock" one) red "B" will remain on the status bar, but something will probably happen to your image. Press F4 again - the menu will appear. Press [E] to remove the block. The red "B" will disappear. Then press F4 again if you want to start selecting a new block. That's it. Notice you can draw characters etc. while in block mode. 
+
+Here's the block operations list:
+
+Page 1:
+    a.Copy - copies the selection to clipboard for pasting in the future.
+    b.Cut - same as above, but clears the selection after copying it
+    c.Clear - clears the selection
+    d.Fill - fills the selection either with entered string or with the content of clipboard. In the first case there are four ways of filling. Here's an example:
+
+ We want to fill a 7x7 selection with the "foobar" string. Here are the results for different modes:
+	
+ foobarf  Vertical Lines
+ foobarf
+ foobarf
+ foobarf
+ foobarf
+ foobarf
+ foobarf
+
+ fffffff  Horiznotal Lines
+ ooooooo
+ ooooooo
+ bbbbbbb
+ aaaaaaa
+ rrrrrrr
+ fffffff
+
+ foafoaf  Vertically
+ obrobro
+ oafoafo
+ brobrob
+ afoafoa
+ robrobr
+ foafoaf
+ obrobro
+
+ foobarf  Horizontally
+ oobarfo
+ obarfoo
+ barfoob
+ arfooba
+ rfoobar
+ foobarf
+
+    e.DelBlock - removes the curren selection, so that you are no longer in block mode and can select a new one.
+    f.Cancel - turn the menu off, but stay in block mode
+    g.More--> - show next page
+
+Page 2:
+    a.Colorize - gives currently set attribute and colors to all characters in the selection
+    b.Rotate - rotates the selection by 90, 180 or 270 degrees. The upper left-hand corner of image after rotation is placed in the upper left-hand corner of the selection.
+    c.MirrorH - mirrors the selection horizontally, with optional character conversion. Some characters are "mirrorable", that means there are some other characters that (more or less) look like them flipped. You can use the conversion or not. Here's a list of convertable characters: \ <-> /, ` <-> ,, . <-> ', _ <-> ", ^ <-> v, M <-> W, m <-> w I know you may not like this list, the conversion table should be placed in a separate file soon.
+    d.MirrorV - mirrors the selection vertically, with optionall character conversion. Just like above, but for other characters: all types of brackets, b <-> d, p <-> q, > <-> <, / <-> \     
+    e.DrawBox - draws a 1-character wide box around the selection. You can specify a different character sequence for each wall. Corners are not drawn.
+    f.Cancel - just like cancel in page one
+    g.Previous--> - previous page
+    
+4. CONTACT
+
+You can contact me by email: kukimik@poczta.onet.pl
+Mostly for Polish users - my GG number is: 1903271
+CAVE WALL Homepage: http://www-users.mat.umk.pl/~mckuk/cavewall/index.html
+
+5. HAVE FUN!
